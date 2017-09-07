@@ -18,12 +18,16 @@ Generates sequences of RSA estimates across time.
 Function: RSAseconds8(where, low, high)
 
 The arguments within the function are:
+
 where: the location of your MindWare output files. These files must be cleaned data in excel with the worksheets “HRV Stats” and “IBI Series”. Each individual has their own file. Make sure nothing else is in this folder except these individual files.
 	Example (for Mac users): where = (‘/Users/~/Dropbox/IBI data/’)
+	
 low: the lower frequency to be included in the RSA range. For adults this is typically .12.
 		Example: low = 0.12
+		
 high: the upper-bound frequency. For adults this is typically .40.
 		Example: high = 0.40
+		
 After setting these values, you would simply type RSAseconds8(where, low, high) into the console. 
 You can use this function on its own using these commands. If you would prefer, you can use the GUI instead (described below).
 
