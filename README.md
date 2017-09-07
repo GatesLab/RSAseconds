@@ -49,12 +49,19 @@ In the where directory that you indicated in RSAgui you will find a folder “RS
 Open one up. If you go to the “RSAseconds” worksheet, you’ll see two columns that are like this: 
 
 16  5.181235
+
 17  5.398286
+
 18  5.434318
+
 19  5.169993
+
 20  5.328098
+
 …
+
 …
+
 189  5.143205
 
 Where “…” indicates the series continues but is not picture here. 
