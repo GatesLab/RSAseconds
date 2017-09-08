@@ -101,7 +101,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 low = str2double(get(handles.edit16,'String'));
 where = get(handles.edit3,'String');
 high =  str2double(  get( handles.edit18, 'String' )  );
- rsaseconds8(where, low, high)
+ rsaseconds9(where, low, high)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)

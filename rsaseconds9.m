@@ -1,4 +1,4 @@
-function rsaseconds8(where, low, high)
+function rsaseconds9(where, low, high)
 
 %% This function has been created by Kathleen M. Gates (2011; update 2014; update for Mac oct. 2015; debugged April 2017)
 %  the following fields must be populated prior to running:
