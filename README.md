@@ -35,7 +35,7 @@ After setting these values, you would simply type RSAsecondsMW9(where, low, high
 You can use this function on its own using these commands. If you would prefer, you can use the GUI instead (described below).
 
 # Using RSAseconds GUI
-1.	After following the steps in the “Before starting” section, type RSAgui into the Matlab command window. 
+1.	After following the steps in the “Before starting” section, type RSAgui into the Matlab command window. You'll see this: 
 
 2.  Click “Push here to indicate location of data” to do just that. Indicate the directory *where* discussed above.  
 
