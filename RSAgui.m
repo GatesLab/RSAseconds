@@ -102,9 +102,10 @@ low = str2double(get(handles.edit16,'String'));
 where = get(handles.edit3,'String');
 high =  str2double(  get( handles.edit18, 'String' )  );
 if get(handles.radiobutton6,'Value') == 0
-    RSAseconds3(where, low, high)
+    RSAseconds(where, low, high)
 else
-    rsaseconds9(where, low, high)
+   mindware = 1;
+    RSAseconds(where, low, high)
 end
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB

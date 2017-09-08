@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # RSAseconds
 Generates sequences of RSA estimates across time.
 
@@ -15,9 +20,7 @@ Generates sequences of RSA estimates across time.
 
 # Using RSAseconds Using the Command Window
 
-For MindWare, use the function: RSAsecondsMW9(where, low, high).
-
-For data that are in the form of a single IBI series, use the function: RSAseconds3(where, low, high)
+The function is: RSAseconds(where, low, high, mindware).
 
 The arguments within the functions are:
 
@@ -30,7 +33,10 @@ The arguments within the functions are:
 *high*: the upper-bound frequency. For adults this is typically .40.
 		Example: high = 0.40;
 		
-After setting these values, you would simply type RSAsecondsMW9(where, low, high) for MindWare data or RSAseconds3(where, low, high) into the console. 
+*mindware*: here is where you can indicate if your data were outputted by MindWare.
+    Example: mindware = 'yes';
+		
+After setting these values, you would simply type RSAseconds(where, low, high) if you didn't use MindWare and RSAseconds(where, low, high, mindware) if you used MindWare. 
 
 You can use this function on its own using these commands. If you would prefer, you can use the GUI instead (described below).
 
