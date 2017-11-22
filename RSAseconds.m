@@ -4,7 +4,7 @@ function RSAseconds(where, low, high, mindware)
 %       where = 'type here the path to the folder where your data are';
 %       low = .##; type the lower bound for the frequency range of interest (e.g., .15)
 %       high = .##; type the higher bound for the frequency range of interest (e.g., .40)
-%
+%       mindware = 0 is default; anything listed for mindware (i.e., 1) indicates mindware data 
 %       Adapted July 2013 for use with Actiheart software.
 %updated 2014
 %updated oct 2015 for mac
@@ -16,12 +16,13 @@ if nargin > 4
     error('myfuns:RSAseconds:TooManyInputs', ...
         'requires at most 4 inputs');
 end
-mindware = 1;
 
 % Fill in unset optional values.
 switch nargin
-    case 2
+    case 3
         mindware = 0;
+    case 4
+        mindware = 1;
 end
 
 cd(where)
@@ -159,7 +160,13 @@ for p = 1: subjects
             end
         end
     else
-        data = load(fullfile(where, list(p).name));
+        [A,B] = xlsfinfo(fullfile(where, list(p).name));
+
+        if isempty(A) == 1
+            data = load(fullfile(where, list(p).name));
+        else
+            data = xlsread(fullfile(where, list(p).name));
+        end
         
         if round(data(1)) ~= data(1) && data(1)<10
             data = round(data*1000); % this is to put it in msecs rather than seconds
@@ -210,8 +217,8 @@ for p = 1: subjects
         forsave =vertcat(T31,meanRSA)';
         
         [pathstr, name, ext] = fileparts(list(p).name);
-        output = fullfile(outputloc, [name '_RSA.xlsx'] );
-        xlswrite(output, forsave);
+        output = fullfile(outputloc, [name '_RSA.csv'] );
+        csvwrite(output, forsave);
         
         clear RSA
     else
