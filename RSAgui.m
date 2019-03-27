@@ -105,7 +105,7 @@ if get(handles.radiobutton6,'Value') == 0
     RSAseconds(where, low, high)
 else
    mindware = 1;
-    RSAseconds(where, low, high)
+    RSAseconds(where, low, high, mindware)
 end
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
