@@ -33,10 +33,9 @@ list = dir; list(1:2,:) = [];
 subjects = length(list(:,1));
 outputloc = fullfile(where, 'RSA');
 mkdir(outputloc)
-
+problems = []
 putmissing = fullfile(where, 'Problems');
 mkdir(putmissing)
-problems.length= 'Begin';
 
 %% window
 % s(n,k) = sumI(ai)[sum(N-1)x(m+nL)hi(m)e^-j2pi(k/K)m]^2
@@ -54,12 +53,12 @@ for p = 1: subjects
     if mindware == 1
         [A,B] = xlsfinfo(fullfile(where, list(p).name));
         if any(strcmp(B, 'IBI Series')) == 0
-            problems.sheet = char(problems.sheet, list(p).name);
+            problems(end+1).sheet = char(list(p).name);
             movefile(fullfile(where, list(p,:)), fullfile(putmissing, list(p).name))
         else
             datao = xlsread(fullfile(where, list(p).name), 'IBI Series');
             if any(strcmp(B, 'HRV Stats')) == 0
-                problems.sheet = char(problems.sheet, list(p).name);
+                problems(end+1).sheet = char(list(p).name);
                 movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
             else
                 [datalength,strdata]= xlsread(fullfile(where, list(p).name), 'HRV Stats');
@@ -111,7 +110,7 @@ for p = 1: subjects
                                 missingnan(end+1) = t;
                             elseif datao(t,i)-meanibi > standdev*3
                                 flag(end+1) = t;
-                                problems.outlier = char(problems.outlier, list(p).name);
+                                problems(end+1).outlier = char(list(p).name);
                             else
                                 added = added + datao(t,i);
                             end
@@ -222,7 +221,7 @@ for p = 1: subjects
         
         clear RSA
     else
-        problems.length = char(problems.length, list(p).name);
+        problems(end+1).length = char(list(p).name);
         movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
     end
 end
