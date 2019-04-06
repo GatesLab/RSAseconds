@@ -218,6 +218,8 @@ for p = 1: subjects
         [pathstr, name, ext] = fileparts(list(p).name);
         output = fullfile(outputloc, [name '_RSA.csv'] );
         csvwrite(output, forsave);
+        csvwrite(fullfile(outputloc, [name '_IBI.csv'] ), data);
+        csvwrite(fullfile(outputloc, [name '_IBI_interp.csv'] ), y);
         
         clear RSA
     else
