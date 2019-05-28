@@ -33,7 +33,7 @@ list = dir; list(1:2,:) = [];
 subjects = length(list(:,1));
 outputloc = fullfile(where, 'RSA');
 mkdir(outputloc)
-problems = []
+problems = [];
 putmissing = fullfile(where, 'Problems');
 mkdir(putmissing)
 
@@ -52,11 +52,15 @@ for p = 1: subjects
     
     if mindware == 1
         [A,B] = xlsfinfo(fullfile(where, list(p).name));
-        if any(strcmp(B, 'IBI Series')) == 0
+        if any([strcmp(B, 'IBI') strcmp(B, 'IBI Series')]) == 0
             problems(end+1).sheet = char(list(p).name);
-            movefile(fullfile(where, list(p,:)), fullfile(putmissing, list(p).name))
+            movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
         else
+                try
             datao = xlsread(fullfile(where, list(p).name), 'IBI Series');
+                catch
+            datao = xlsread(fullfile(where, list(p).name), 'IBI');
+                end
             if any(strcmp(B, 'HRV Stats')) == 0
                 problems(end+1).sheet = char(list(p).name);
                 movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
@@ -66,20 +70,21 @@ for p = 1: subjects
                 
                 if isempty(datao) == 0 % only works if not empty
                     datao(1,:) = []; % the first row is just a count of columns
-                    for pp = 1: length(datao(1,:))
-                        if datalength(38,1) == 9998 || datalength(38,1) == 9999 % if missing
-                            countnan = 1+countnan;
-                            %elseif isnan(datalength(40,pp)) == 1
-                            %countnan = 1+countnan;
-                        else
-                            countnan = countnan + 0;
-                        end
-                    end
+                    %% 5/26/2019 commented out bc Mindware keeps changing format
+%                     for pp = 1: length(datao(1,:))
+%                         if datalength(38,1) == 9998 || datalength(38,1) == 9999 % if missing
+%                             countnan = 1+countnan;
+%                             %elseif isnan(datalength(40,pp)) == 1
+%                             %countnan = 1+countnan;
+%                         else
+%                             countnan = countnan + 0;
+%                         end
+                    % end
                 end
                 if isempty(datao)==1
                     movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
-                elseif countnan >= 1
-                    movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
+%                 elseif countnan >= 1
+%                     movefile(fullfile(where, list(p).name), fullfile(putmissing, list(p).name))
                 else
                     for i = 1: length(datao(1,:)) % do for each epoch; in terms of seconds
                         % due to differences in MindWare versions, need to find unique
@@ -219,7 +224,7 @@ for p = 1: subjects
         output = fullfile(outputloc, [name '_RSA.csv'] );
         csvwrite(output, forsave);
         csvwrite(fullfile(outputloc, [name '_IBI.csv'] ), data);
-        csvwrite(fullfile(outputloc, [name '_IBI_interp.csv'] ), y);
+        csvwrite(fullfile(outputloc, [name '_IBI_interp_cent.csv'] ), y);
         
         clear RSA
     else
